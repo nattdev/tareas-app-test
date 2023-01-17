@@ -13,13 +13,17 @@ const addTask = (evento) => {
     const value = input.value;
     const date = dateTime.value;
     const dateFormat = moment(date).format("DD/MM/YYYY");
-    
+    const complete = false;
+
+
     input.value = '';
     dateTime.value = "";
     
     const taskObject = {
       value,
       dateFormat,
+      complete,
+      id : uuid.v4(),
     };
 
     list.innerHTML = "";
@@ -35,7 +39,7 @@ const addTask = (evento) => {
 }
 
 
-export const createTask = ({value, dateFormat}) => {
+export const createTask = ({value, dateFormat, complete, id}) => {
 
     const task = document.createElement('li');
     task.classList.add('card');
@@ -43,15 +47,22 @@ export const createTask = ({value, dateFormat}) => {
     const titleTask = document.createElement('span');
     const dateElement = document.createElement("span");
     dateElement.innerHTML = dateFormat;
+    console.log(complete);
+    const check = checkComplete(id);
+    if (complete) {
+      element.classList.toggle('fas');
+      element.classList.toggle('completeIcon');
+      element.classList.toggle('far');
+    }
 
     titleTask.classList.add('task');
     titleTask.innerText = value;
-    taskContent.appendChild(checkComplete());
+    taskContent.appendChild(check);
     taskContent.appendChild(titleTask);
 
     task.appendChild(taskContent);
     task.appendChild(dateElement);
-    task.appendChild(deleteIcon());
+    task.appendChild(deleteIcon(id));
     return task;
 };
 
