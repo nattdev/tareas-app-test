@@ -46,7 +46,11 @@ form {
   padding: 10px;
   border: 1px solid #eee;
   outline: none;
+<<<<<<< HEAD
   width: 65%;
+=======
+  width: 40%;
+>>>>>>> clase06
 }
 
 .inputForm::placeholder {
@@ -124,4 +128,9 @@ form {
 
 .noTasks {
   font-size: 48px;
+}
+
+.date {
+  width: 100%;
+  padding: 1em;
 }
