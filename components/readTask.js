@@ -1,14 +1,23 @@
 import { createTask } from "./addTask.js";
+import dateElement from "./dateElement.js";
+import { uniqueDates } from "../services/date.js";
 
-
-const readTask = () => {
+const displayTask = () => {
     const taskList = JSON.parse(localStorage.getItem("tasks")) || [];
     const list = document.querySelector("[data-list]");
+        // console.log(dateElement("03/10/2023"))
 
-    taskList.forEach((task) => {
-        list.appendChild(createTask(task));
+    const dates = uniqueDates(taskList);
+    console.log(dates);
+
+    dates.forEach((dates) => {
+        list.appendChild(dateElement(dates));
+        taskList.forEach((task) => {
+            if (dates == task.dateFormat) {
+                list.appendChild(createTask(task));
+            }
+        });    
     });
-
 };
 
-export default readTask;
+export default displayTask;
